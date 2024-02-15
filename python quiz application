@@ -1,0 +1,39 @@
+import random
+
+questions = [
+    {"question": "What is the capital of France?", "answers": ["Paris", "London", "Berlin"], "correct_answer": 0},
+    {"question": "What is the largest planet in our solar system?", "answers": ["Jupiter", "Mars", "Earth"], "correct_answer": 0},
+    {"question": "What is the full form of html?", "answers": ["hyper text markup language", "high text markup language", "hyper tech makeup language"], "correct_answer": 0},
+    {"question": "how much would you rate hunar intern?", "answers": ["5/10", "10/10", "100/10"], "correct_answer": 2},
+]
+
+random.shuffle(questions)
+score = 0
+
+for question in questions:
+    print(question["question"])
+    for i, answer in enumerate(question["answers"]):
+        print(f"{i+1}. {answer}")
+
+    try:
+        user_answer = int(input("Enter your answer (1-3): ")) - 1
+        if user_answer not in range(len(question["answers"])):
+            raise ValueError("Invalid answer number.")
+    except ValueError:
+        print("Invalid input. Please enter a number between 1 and 3.")
+        continue
+
+    if user_answer == question["correct_answer"]:
+        print("Correct!")
+        score += 1
+    else:
+        print("Incorrect. The correct answer is:", question["answers"][question["correct_answer"]])
+
+print("Final score:", score)
+
+if score == len(questions):
+    print("Congratulations! You got all the answers correct!")
+elif score > len(questions) / 2:
+    print("Great job! You answered most of the questions correctly.")
+else:
+    print("Keep practicing! You can do better next time.")
